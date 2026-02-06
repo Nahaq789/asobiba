@@ -9,3 +9,6 @@
 
 @run_035:
   cd 0.35 && go run ./...
+
+@run_uuid:
+  cd uuid && go run ./...
