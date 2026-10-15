@@ -11,15 +11,15 @@ const loopCount = 1000000
 const tryCount = 100
 
 func main() {
-	for a := 0; a < tryCount; a++ {
+	for a := range tryCount {
 		fmt.Printf("%v回目！\n", a+1)
 		c := make(chan bool, bufferSize)
 
-		for i := 0; i < bufferSize; i++ {
+		for range bufferSize {
 			go loop(c)
 		}
 		found := false
-		for i := 0; i < bufferSize; i++ {
+		for range bufferSize {
 			if <-c {
 				found = true
 			}
@@ -35,7 +35,7 @@ func main() {
 
 func loop(c chan bool) {
 	seen := make(map[uuid.UUID]bool, loopCount)
-	for i := 0; i < loopCount; i++ {
+	for range loopCount {
 		id := uuid.New()
 		if seen[id] {
 			c <- true
